@@ -19,10 +19,6 @@ const 橙色64 = preload("res://art/cell/橙色64.png")
 				self.texture=橙色64
 			"blue":
 				self.texture=蓝灰色64
-#@export var text:Texture2D:
-	#set(v):
-		#text=v
-		#self.texture=text
 
 var cell_pos:Vector2
 
@@ -31,8 +27,6 @@ func _ready() -> void:
 	var pos:Vector2=self.position+self.pivot_offset
 	cell_pos=Global.format_cell(pos)
 	Global.cell_pos_arry.append(cell_pos)
-	#print(Global.format_cell(self.position+self.pivot_offset))
-	#self.texture=text
 
 
 func _on_gui_input(event: InputEvent) -> void:
@@ -41,18 +35,42 @@ func _on_gui_input(event: InputEvent) -> void:
 			#记录被选中的cell
 			if not is_instance_valid(Global.selected_cell0):
 				Global.selected_cell0=self
+				#print("0x",Global.selected_cell0)
 				return
 			elif is_instance_valid(Global.selected_cell0) and not is_instance_valid(Global.selected_cell1):
 				Global.selected_cell1=self
+				#print("1x",Global.selected_cell1)
 			elif is_instance_valid(Global.selected_cell0) and is_instance_valid(Global.selected_cell1):
 				Global.selected_cell0=Global.selected_cell1
 				Global.selected_cell1=self
+				#print("0x",Global.selected_cell0)
+				#print("1x",Global.selected_cell1)
 			
+
 			#如果是同类型的，将计算消除
 			if Global.selected_cell1.type==Global.selected_cell0.type:
-				if Global.calculate(cell_pos):
-					Global.selected_cell0.modulate.a=0
-					Global.selected_cell1.modulate.a=0
-				self.modulate=Color(1,0,0,self.modulate.a)
+				if Global.calculate(Global.selected_cell0.cell_pos,Global.selected_cell1.cell_pos):
+					_disable()
+			self.modulate=Color(1,0,0,self.modulate.a)
 			#print(cell_pos)
 	pass # Replace with function body.
+
+func _disable():
+	Global.selected_cell0.modulate.a=0
+	Global.selected_cell1.modulate.a=0
+	Global.selected_cell0=null
+	Global.selected_cell1=null
+	
+	printt(Global.selected_cell0,Global.selected_cell1)
+
+
+#func _check_single_corner(a: Vector2i, b: Vector2i) -> bool:
+	#var corner1 = Vector2i(a.x, b.y)  # 拐点1（网页6的Π型路径[6](@ref)）
+	#var corner2 = Vector2i(b.x, a.y)  # 拐点2
+	#
+	#return (grid[corner1.y][corner1.x] == 0 && 
+			#_check_straight_line(a, corner1) && 
+			#_check_straight_line(corner1, b)) || \
+		   #(grid[corner2.y][corner2.x] == 0 && 
+			#_check_straight_line(a, corner2) && 
+			#_check_straight_line(corner2, b))
