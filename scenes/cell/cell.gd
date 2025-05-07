@@ -38,17 +38,21 @@ func _ready() -> void:
 func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.is_pressed():
 		if event.button_index==MOUSE_BUTTON_LEFT:
+			#记录被选中的cell
 			if not is_instance_valid(Global.selected_cell0):
 				Global.selected_cell0=self
+				return
 			elif is_instance_valid(Global.selected_cell0) and not is_instance_valid(Global.selected_cell1):
 				Global.selected_cell1=self
 			elif is_instance_valid(Global.selected_cell0) and is_instance_valid(Global.selected_cell1):
 				Global.selected_cell0=Global.selected_cell1
 				Global.selected_cell1=self
-				
-			if Global.calculate(cell_pos):
-				Global.selected_cell0.modulate.a=0
-				Global.selected_cell1.modulate.a=0
-			self.modulate=Color(1,0,0,self.modulate.a)
+			
+			#如果是同类型的，将计算消除
+			if Global.selected_cell1.type==Global.selected_cell0.type:
+				if Global.calculate(cell_pos):
+					Global.selected_cell0.modulate.a=0
+					Global.selected_cell1.modulate.a=0
+				self.modulate=Color(1,0,0,self.modulate.a)
 			#print(cell_pos)
 	pass # Replace with function body.

@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://1dj6rs7utjts"]
+[gd_scene load_steps=6 format=3 uid="uid://1dj6rs7utjts"]
 
 [ext_resource type="Texture2D" uid="uid://beok1mghaf2mx" path="res://art/cell/白色64.png" id="1_hyk8p"]
 [ext_resource type="PackedScene" uid="uid://cb46wugbmq01a" path="res://scenes/cell/cell.tscn" id="1_iuonh"]
 [ext_resource type="Script" uid="uid://wya8pl0vi6fe" path="res://scenes/main/grid_container.gd" id="1_k2fmo"]
 [ext_resource type="Texture2D" uid="uid://blko8ieffrr3h" path="res://art/cell/蓝灰色64.png" id="2_iuonh"]
+[ext_resource type="Texture2D" uid="uid://medgqi3v4eot" path="res://art/cell/橙色64.png" id="5_6q06x"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -42,6 +43,7 @@ script = ExtResource("1_k2fmo")
 [node name="Cell" parent="GridContainer" instance=ExtResource("1_iuonh")]
 layout_mode = 2
 texture = ExtResource("1_hyk8p")
+type = "white"
 
 [node name="Cell2" parent="GridContainer" instance=ExtResource("1_iuonh")]
 layout_mode = 2
@@ -57,7 +59,8 @@ texture = ExtResource("2_iuonh")
 
 [node name="Cell5" parent="GridContainer" instance=ExtResource("1_iuonh")]
 layout_mode = 2
-texture = ExtResource("2_iuonh")
+texture = ExtResource("5_6q06x")
+type = "orange"
 
 [node name="Cell6" parent="GridContainer" instance=ExtResource("1_iuonh")]
 layout_mode = 2
@@ -109,11 +112,11 @@ texture = ExtResource("2_iuonh")
 
 [node name="Cell18" parent="GridContainer" instance=ExtResource("1_iuonh")]
 layout_mode = 2
-texture = ExtResource("2_iuonh")
+type = "black"
 
 [node name="Cell19" parent="GridContainer" instance=ExtResource("1_iuonh")]
 layout_mode = 2
-texture = ExtResource("2_iuonh")
+type = "black"
 
 [node name="Cell20" parent="GridContainer" instance=ExtResource("1_iuonh")]
 layout_mode = 2
@@ -153,7 +156,7 @@ texture = ExtResource("2_iuonh")
 
 [node name="Cell29" parent="GridContainer" instance=ExtResource("1_iuonh")]
 layout_mode = 2
-texture = ExtResource("2_iuonh")
+type = "black"
 
 [node name="Cell30" parent="GridContainer" instance=ExtResource("1_iuonh")]
 layout_mode = 2
