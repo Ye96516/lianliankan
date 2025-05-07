@@ -62,15 +62,3 @@ func _disable():
 	Global.selected_cell1=null
 	
 	printt(Global.selected_cell0,Global.selected_cell1)
-
-
-#func _check_single_corner(a: Vector2i, b: Vector2i) -> bool:
-	#var corner1 = Vector2i(a.x, b.y)  # 拐点1（网页6的Π型路径[6](@ref)）
-	#var corner2 = Vector2i(b.x, a.y)  # 拐点2
-	#
-	#return (grid[corner1.y][corner1.x] == 0 && 
-			#_check_straight_line(a, corner1) && 
-			#_check_straight_line(corner1, b)) || \
-		   #(grid[corner2.y][corner2.x] == 0 && 
-			#_check_straight_line(a, corner2) && 
-			#_check_straight_line(corner2, b))
