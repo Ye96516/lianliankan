@@ -1,13 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://cb46wugbmq01a"]
+[gd_scene load_steps=4 format=3 uid="uid://cb46wugbmq01a"]
 
-[ext_resource type="Texture2D" uid="uid://dwq4opiixyj8e" path="res://art/cell/黑色64.png" id="1_ct601"]
+[ext_resource type="Texture2D" uid="uid://beok1mghaf2mx" path="res://art/cell/白色64.png" id="2_1f7j7"]
 [ext_resource type="Script" uid="uid://byiiawcivm5he" path="res://scenes/cell/cell.gd" id="2_4gomg"]
+[ext_resource type="Script" uid="uid://c7rlong67umi0" path="res://core_scripts/UI_hover.gd" id="3_1f7j7"]
 
-[node name="Cell" type="TextureRect"]
-offset_right = 40.0
-offset_bottom = 40.0
-pivot_offset = Vector2(32, 32)
-texture = ExtResource("1_ct601")
+[node name="Cell" type="PanelContainer" node_paths=PackedStringArray("cell_pic")]
+custom_minimum_size = Vector2(128, 128)
+offset_right = 128.0
+offset_bottom = 128.0
 script = ExtResource("2_4gomg")
+cell_pic = NodePath("Cell")
+type = "白色64"
+
+[node name="Cell" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("2_1f7j7")
+expand_mode = 1
+
+[node name="UIHover" type="Node" parent="."]
+script = ExtResource("3_1f7j7")
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
