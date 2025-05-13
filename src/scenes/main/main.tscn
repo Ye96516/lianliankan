@@ -1,9 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://1dj6rs7utjts"]
+[gd_scene load_steps=9 format=3 uid="uid://1dj6rs7utjts"]
 
 [ext_resource type="PackedScene" uid="uid://cb46wugbmq01a" path="res://scenes/cell/cell.tscn" id="1_iuonh"]
 [ext_resource type="Script" uid="uid://wya8pl0vi6fe" path="res://scenes/main/grid_container.gd" id="1_k2fmo"]
+[ext_resource type="Texture2D" uid="uid://dbgkmvwh0c87s" path="res://icon.svg" id="1_ow5a4"]
 [ext_resource type="Script" uid="uid://jrkn2xl256tn" path="res://scenes/main/line.gd" id="4_l3cfh"]
+[ext_resource type="Shader" uid="uid://dqkajbtrq0dy" path="res://data/shader/leidian.gdshader" id="6_hujxm"]
 [ext_resource type="Script" uid="uid://bnvqh4d8ypvf2" path="res://scenes/main/draw.gd" id="6_ow5a4"]
+[ext_resource type="Texture2D" uid="uid://msjk4ggyq8vn" path="res://art/免抠图片_1747062233860.png" id="7_hujxm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a8run"]
+shader = ExtResource("6_hujxm")
+shader_parameter/is_disabled = false
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -12,6 +19,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_ow5a4")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 visible = false
@@ -30,14 +44,15 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 132.0
+offset_left = 396.0
 offset_top = 132.0
-offset_right = 132.0
+offset_right = 396.0
 offset_bottom = 132.0
 grow_horizontal = 2
 grow_vertical = 2
 columns = 8
 script = ExtResource("1_k2fmo")
+type_number = 4
 
 [node name="Cell" parent="GridContainer" instance=ExtResource("1_iuonh")]
 layout_mode = 2
@@ -189,6 +204,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="DrawGrid" type="Node2D" parent="."]
+visible = false
 position = Vector2(264, 0)
 script = ExtResource("6_ow5a4")
 cell_size = Vector2i(128, 128)
@@ -198,5 +214,9 @@ grid_size = Vector2i(30, 30)
 script = ExtResource("4_l3cfh")
 
 [node name="Line2D" type="Line2D" parent="Line"]
+material = SubResource("ShaderMaterial_a8run")
+width = 200.0
+texture = ExtResource("7_hujxm")
+texture_mode = 2
 
 [connection signal="child_entered_tree" from="GridContainer" to="GridContainer" method="_on_child_entered_tree"]

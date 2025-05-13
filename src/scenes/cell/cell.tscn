@@ -1,0 +1,54 @@
+[gd_scene load_steps=9 format=3 uid="uid://cb46wugbmq01a"]
+
+[ext_resource type="Texture2D" uid="uid://beok1mghaf2mx" path="res://art/cell/白色64.png" id="2_1f7j7"]
+[ext_resource type="Script" uid="uid://byiiawcivm5he" path="res://scenes/cell/cell.gd" id="2_4gomg"]
+[ext_resource type="Script" uid="uid://c7rlong67umi0" path="res://core_scripts/UI_hover.gd" id="3_1f7j7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4m6nx"]
+
+[sub_resource type="Shader" id="Shader_1f7j7"]
+code = "shader_type canvas_item;
+
+uniform sampler2D noise;
+uniform float step_width: hint_range(0.0, 1.0, 0.05) = 1.0;
+
+void fragment() {
+	vec4 noise_color = texture(noise, UV);
+	vec4 current_color = texture(TEXTURE, UV);
+	if(noise_color.r>step_width-0.1 && step_width!=1.0){
+		COLOR.rgb=vec3(0.541,0.878,0.906);
+	}
+	COLOR.a = step(noise_color.r, step_width) * current_color.a;
+	//COLOR.a = step(noise_color.r, (cos(TIME) + 1.0) / 2.0) * current_color.a;
+}"
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_r0oyy"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_4m6nx"]
+noise = SubResource("FastNoiseLite_r0oyy")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mvlim"]
+resource_local_to_scene = true
+shader = SubResource("Shader_1f7j7")
+shader_parameter/noise = SubResource("NoiseTexture2D_4m6nx")
+shader_parameter/step_width = 1.0
+
+[node name="Cell" type="PanelContainer" node_paths=PackedStringArray("cell_pic")]
+custom_minimum_size = Vector2(128, 128)
+offset_right = 128.0
+offset_bottom = 128.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_4m6nx")
+script = ExtResource("2_4gomg")
+cell_pic = NodePath("Cell")
+type = "白色64"
+
+[node name="Cell" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_mvlim")
+layout_mode = 2
+texture = ExtResource("2_1f7j7")
+expand_mode = 1
+
+[node name="UIHover" type="Node" parent="."]
+script = ExtResource("3_1f7j7")
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

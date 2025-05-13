@@ -193,7 +193,7 @@ func _check_bfs_path(start: Vector2, end: Vector2) -> bool:
 					"path":new_path
 					}
 					final_path=new_path
-					print("最终字典为:", final_dic)
+					#print("最终字典为:", final_dic)
 					#print("path.size",queue[0].path.size())
 					return true
 			if next_pos in cell_pos_arry or\
@@ -215,9 +215,9 @@ func _check_bfs_path(start: Vector2, end: Vector2) -> bool:
 					"path":new_path
 				})
 
-	print("失败了，噜啦噜啦噜啦啦啦")
-	print(selected_cell0,"000")
-	print(selected_cell1,"111")
+	#print("失败了，噜啦噜啦噜啦啦啦")
+	#print(selected_cell0,"000")
+	#print(selected_cell1,"111")
 	return false
 
 #消除匹配的cell的坐标，对应的节点在cell本身的脚本替换为空

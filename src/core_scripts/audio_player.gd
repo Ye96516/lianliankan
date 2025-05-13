@@ -2,6 +2,15 @@ extends Node
 
 var audio_array:Array[AudioStreamPlayer]
 
+const CLICK = preload("res://art/sounds/click.mp3")
+const SELECTED = preload("res://art/sounds/selected.mp3")
+
+func play_click():
+	play(CLICK)
+
+func play_selected():
+	play(SELECTED)
+	
 ##播放音频
 func play(stream:AudioStream, single:bool=false,is_release:bool=true,volume:float=0,) -> AudioStreamPlayer:
 	if single:
@@ -26,6 +35,7 @@ func play(stream:AudioStream, single:bool=false,is_release:bool=true,volume:floa
 	audio.playing=true
 	#返回该音频节点
 	return audio
+
 
 
 ##暂停此播放器
